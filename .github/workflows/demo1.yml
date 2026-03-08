@@ -14,7 +14,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.base.ref == 'main'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.pull_request.base.ref == 'main'
     steps:
       - name: Output event data
         run: echo "${{ toJSON(github.event) }}"
