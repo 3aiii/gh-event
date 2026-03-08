@@ -3,11 +3,18 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - main
   workflow_dispatch:
-
+  push:
+    branches:
+      - main
+    path-ignore:
+      - .github/workflows/
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main'
     steps:
       - name: Output event data
         run: echo "${{ toJSON(github.event) }}"
